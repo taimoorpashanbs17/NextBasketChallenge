@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{580E5B4E-0291-40BC-BC40-86D28FEA4548}|Default">
+  <MonoDevelop.Ide.ItemProperties.NextBasketChallenge PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Features/Orders.feature">
+    <Files>
+      <File FileName="Features/Orders.feature.cs" Line="1" Column="1" />
+      <File FileName="Features/Orders.feature" Line="7" Column="28" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Option id="ShowAllFiles" value="True" />
+          <Node name="NextBasketChallenge" expanded="True" selected="True">
+            <Node name="NextBasketChallenge" expanded="True">
+              <Node name="Features" expanded="True" />
+              <Node name="Hooks" expanded="True" />
+              <Node name="Pages" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
