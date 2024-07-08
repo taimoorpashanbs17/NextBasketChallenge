@@ -4,14 +4,14 @@ Scenario: Order the first in stock non-promo product (use South Africa as Countr
     Given Open Browser with provided URL
     When Hover to non-promo product
     Then Buy Button should be displaying
-    And Click on Buy Button
-    And Click on Cart Button
-    And Click on 'Go to Payment' Button
-    And Browser should navigate to Login Page
-    And Register user with Shopping with Guest.
-    And Click on 'Confirm Order' Button
-    And User should be navigated to 'Success' Page
-    And 'Thanks' Message should be displayed
+    Then Click on Buy Button
+    Then Click on Cart Button
+    Then Click on 'Go to Payment' Button
+    Then Browser should navigate to Login Page
+    Then Register user with Shopping with Guest.
+    Then Click on 'Confirm Order' Button
+    Then User should be navigated to 'Success' Page
+    Then 'Thanks' Message should be displayed
 
 Scenario: Make sure that "50% off" label is visible
     Given Open Browser with provided URL
