@@ -1,77 +1,86 @@
-using System;
 using OpenQA.Selenium;
 
 namespace NextBasketChallenge.Pages
-
 {
-    public class CheckOutPage : HomePage{
-        private IWebDriver driver;
-        public CheckOutPage(IWebDriver driver) : base(driver)
+    public class CheckOutPage : BasePage
+    {
+        private readonly IWebDriver driver;
+
+        public CheckOutPage(IWebDriver driver)
+            : base(driver)
         {
             this.driver = driver;
         }
 
-        By nameField = By.Name("shippingAddress.firstName");
-        By surnameField = By.Name("shippingAddress.lastName");
+        readonly By NameField = By.Name("shippingAddress.firstName");
+        readonly By SurnameField = By.Name("shippingAddress.lastName");
 
-        By phoneNumberField = By.Name("shippingAddress.phone");
+        readonly By PhoneNumberField = By.Name("shippingAddress.phone");
 
-        By countryDropDownField = By.XPath("//div[@data-testid='countryField']//input");
-        By cityDropDownField = By.XPath("//div[@data-testid='googleAutocomplete']//input");
-        By postCodeField = By.Name("shippingAddress.postCode");
-        By addressField = By.Name("shippingAddress.address");
-        By confirmOrderButton = By.XPath("//button//p[normalize-space()='Confirm order']");
-        By googleMap = By.XPath("//div[@aria-label='Map']");
+        readonly By CountryDropDownField = By.XPath("//div[@data-testid='countryField']//input");
+        readonly By CityDropDownField = By.XPath("//div[@data-testid='googleAutocomplete']//input");
+        readonly By PostCodeField = By.Name("shippingAddress.postCode");
+        readonly By AddressField = By.Name("shippingAddress.address");
+        readonly By ConfirmOrderButton = By.XPath("//button//p[normalize-space()='Confirm order']");
+        readonly By GoogleMap = By.XPath("//div[@aria-label='Map']");
 
-
-        public void enterName(String name){
-            elementToBeDisplayedOrClickable(nameField);
-            driver.FindElement(nameField).SendKeys(name);
+        public void EnterName(string name)
+        {
+            WaitTillElementToBeDisplayedAndClickable(NameField);
+            EnterText(NameField, name);
         }
 
-        public void enterSurName(String sureName){
-            driver.FindElement(surnameField).SendKeys(sureName);
+        public void EnterSurName(string sureName)
+        {
+            EnterText(SurnameField, sureName);
         }
 
-        public void enterPhoneNumber(String phoneNumber){
-            driver.FindElement(phoneNumberField).SendKeys(phoneNumber);
+        public void EnterPhoneNumber(string phoneNumber)
+        {
+            EnterText(PhoneNumberField, phoneNumber);
         }
 
-        public void selectValueFromAutoSelectDropDown(By locatorName, String valueToSelect){
-            elementToBeDisplayedOrClickable(locatorName);
-            driver.FindElement(locatorName).Click();
-            driver.FindElement(locatorName).Clear();
-            driver.FindElement(locatorName).SendKeys(valueToSelect);
-            String valueXpath = "//p[normalize-space()='"+valueToSelect+"']";
+        public void SelectValueFromAutoSelectDropDown(By locator, string valueToSelect)
+        {
+            WaitTillElementToBeDisplayedAndClickable(locator);
+            ClickElement(locator);
+            ClearElement(locator);
+            EnterText(locator, valueToSelect);
+            string valueXpath = "//p[normalize-space()='" + valueToSelect + "']";
             By valueLocator = By.XPath(valueXpath);
-            elementToBeDisplayedOrClickable(valueLocator);
-            driver.FindElement(valueLocator).Click();
+            WaitTillElementToBeDisplayedAndClickable(valueLocator);
+            ClickElement(valueLocator);
         }
 
-        public void selectCountry(String countryName){
-            selectValueFromAutoSelectDropDown(countryDropDownField, countryName);
+        public void SelectCountry(string countryName)
+        {
+            SelectValueFromAutoSelectDropDown(CountryDropDownField, countryName);
         }
 
-        public void selectCity(String cityName){
-            selectValueFromAutoSelectDropDown(cityDropDownField, cityName);
+        public void SelectCity(string cityName)
+        {
+            SelectValueFromAutoSelectDropDown(CityDropDownField, cityName);
         }
 
-        public void enterPostCodeNumber(String postCodeNumber){
-            elementToBeDisplayedOrClickable(postCodeField);
-            scrollToWebElement(postCodeField);
-            driver.FindElement(postCodeField).SendKeys(postCodeNumber);
+        public void EnterPostCodeNumber(string postCodeNumber)
+        {
+            WaitTillElementToBeDisplayedAndClickable(PostCodeField);
+            ScrollToWebElement(PostCodeField);
+            EnterText(PostCodeField, postCodeNumber);
         }
 
-        public void enterAddress(String address){
-            elementToBeDisplayedOrClickable(addressField);
-            driver.FindElement(addressField).SendKeys(address);
+        public void EnterAddress(string address)
+        {
+            WaitTillElementToBeDisplayedAndClickable(AddressField);
+            EnterText(AddressField, address);
         }
 
-        public void clickOnConfirmPaymentButton(){
-            scrollTillTop();
-            elementToBeDisplayedOrClickable(googleMap);
-            elementToBeDisplayedOrClickable(confirmOrderButton);
-            driver.FindElement(confirmOrderButton).Click();
+        public void ClickOnConfirmPaymentButton()
+        {
+            ScrollTillTop();
+            WaitTillElementToBeDisplayedAndClickable(GoogleMap);
+            WaitTillElementToBeDisplayedAndClickable(ConfirmOrderButton);
+            ClickElement(ConfirmOrderButton);
         }
     }
 }

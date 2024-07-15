@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NextBasketChallenge")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c1f5c9a8007711b86630c21347bff44179c1999")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7bf749d531ce39c8a783302ab6a0a625095d566c")]
 [assembly: System.Reflection.AssemblyProductAttribute("NextBasketChallenge")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NextBasketChallenge")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,33 +1,30 @@
-using System;
-using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace NextBasketChallenge.Pages
 {
-    public class OrderSuccessPage : HomePage
+    public class OrderSuccessPage : BasePage
     {
-        private IWebDriver driver;
+        private readonly IWebDriver driver;
 
-        public OrderSuccessPage(IWebDriver driver)
-            : base(driver)
+        readonly By ThankYouMessage = By.TagName("h1");
+
+        public OrderSuccessPage(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
         }
 
-        By thankYouMessage = By.TagName("h1");
-
-        public void verifyURLContainsSuccess()
+        public void VerifyURLContainsSuccess()
         {
-            waitTillURLContains("success");
-            String successURL = getCurrentURL();
+            WaitTillURLContains("success");
+            string successURL = GetCurrentURL();
             Assert.That(successURL.Contains("success"), Is.EqualTo(true));
         }
 
-        public void verifyThankYouHeaderDisplaying()
+        public void VerifyThankYouHeaderDisplaying()
         {
-            Boolean thankYouHeaderDisplaying = driver.FindElement(thankYouMessage).Displayed;
-            Assert.That(thankYouHeaderDisplaying, Is.EqualTo(true));
+            bool ThankYouHeaderDisplaying = ElementIsDisplaying(ThankYouMessage);
+            Assert.That(ThankYouHeaderDisplaying, Is.EqualTo(true));
         }
     }
 }

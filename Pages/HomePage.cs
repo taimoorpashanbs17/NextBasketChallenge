@@ -1,129 +1,64 @@
-using System;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
 
 namespace NextBasketChallenge.Pages
 {
-    public class HomePage
+    public class HomePage : BasePage
     {
         private IWebDriver driver;
 
-        public HomePage(IWebDriver driver)
+        public HomePage(IWebDriver driver) :base(driver)
         {
             this.driver = driver;
         }
 
-        public Actions actionItem()
-        {
-            return new Actions(driver);
-        }
+        readonly By WorkProduct = By.XPath("//img[@alt='Work']");
+        readonly By AcceptAllButton = By.XPath("//*[@id='root']/div[1]/div/div[2]/button[1]");
 
-        public WebDriverWait wait()
-        {
-            return new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-        }
+        readonly By ProductBuyButton = By.XPath("//button[@aria-label='Add to basket Work']");
 
-        By workProduct = By.XPath("//img[@alt='Work']");
-        By acceptAllButton = By.XPath("//*[@id='root']/div[1]/div/div[2]/button[1]");
-
-        By productBuyButton = By.XPath("//button[@aria-label='Add to basket Work']");
-
-        By cartButton = By.XPath(
+        readonly By CartButton = By.XPath(
             "//button[@aria-label='Open basket menu']//div[@class='gIvgG']//*[name()='svg']"
         );
 
-        By goToPaymentButton = By.XPath("//p[normalize-space()='Go to payment']");
+        readonly By GoToPaymentButton = By.XPath("//p[normalize-space()='Go to payment']");
 
-        public void waitTillElementIsDisplayed(By locatorName)
+        public void HoverToProduct()
         {
-            wait().Until(ExpectedConditions.ElementIsVisible(locatorName));
+            WaitTillElementToBeDisplayedAndClickable(AcceptAllButton);
+            ClickElement(AcceptAllButton);
+            MoveToElementAndPerform(WorkProduct);
+            ActionItem().MoveToElement(driver.FindElement(WorkProduct)).Build().Perform();
+            ClickElement(ProductBuyButton);
         }
 
-        public void waitTillElementIsClickable(By locatorName)
+        public bool BuyButtonDisplaying()
         {
-            wait().Until(ExpectedConditions.ElementToBeClickable(locatorName));
+            return ElementIsDisplaying(ProductBuyButton);
         }
 
-        public void elementToBeDisplayedOrClickable(By locatorName)
+        public void ClickOnBuyButton()
         {
-            waitTillElementIsDisplayed(locatorName);
-            waitTillElementIsClickable(locatorName);
+            ClickElement(ProductBuyButton);
         }
 
-        public void scrollToWebElement(By locatorName)
+        public void ClickOnCartButton()
         {
-            IWebElement element = driver.FindElement(locatorName);
-            ((IJavaScriptExecutor)driver).ExecuteScript(
-                "arguments[0].scrollIntoView(true);",
-                element
-            );
+            WaitTillElementToBeDisplayedAndClickable(CartButton);
+            ClickElement(CartButton);
         }
 
-        public void scrollToBottom()
+        public void ClickOnGoToPaymentButton()
         {
-            ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollBy(0,-350)", "");
+            WaitTillElementToBeDisplayedAndClickable(GoToPaymentButton);
+            ClickElement(GoToPaymentButton);
         }
 
-        public void waitTillURLContains(String textWithInURL)
+        public void DiscountedItemShouldBeDisplaying(string discountedRateItem)
         {
-            wait().Until(ExpectedConditions.UrlContains(textWithInURL));
-        }
-
-        public void waitTillElementIsInvisible(By locatorName)
-        {
-            wait().Until(ExpectedConditions.InvisibilityOfElementLocated(locatorName));
-        }
-
-        public void scrollTillTop()
-        {
-            ((IJavaScriptExecutor)driver).ExecuteScript("window.scrollTo(0, -200)");
-        }
-
-        public String getCurrentURL()
-        {
-            return driver.Url;
-        }
-
-        public void hoverToProduct()
-        {
-            elementToBeDisplayedOrClickable(acceptAllButton);
-            driver.FindElement(acceptAllButton).Click();
-            actionItem().MoveToElement(driver.FindElement(workProduct)).Build().Perform();
-            driver.FindElement(productBuyButton).Click();
-        }
-
-        public Boolean buyButtonDisplaying()
-        {
-            return driver.FindElement(productBuyButton).Displayed;
-        }
-
-        public void clickOnBuyButton()
-        {
-            driver.FindElement(productBuyButton).Click();
-        }
-
-        public void clickOnCartButton()
-        {
-            elementToBeDisplayedOrClickable(cartButton);
-            driver.FindElement(cartButton).Click();
-        }
-
-        public void clickOnGoToPaymentButton()
-        {
-            elementToBeDisplayedOrClickable(goToPaymentButton);
-            driver.FindElement(goToPaymentButton).Click();
-        }
-
-        public void discountedItemShouldBeDisplaying(String discountedRateItem)
-        {
-            String discountedRateItemXpath = "//p[normalize-space()='" + discountedRateItem + "']";
+            string discountedRateItemXpath = "//p[normalize-space()='" + discountedRateItem + "']";
             By discountedRateItemLocator = By.XPath(discountedRateItemXpath);
-            Boolean discountedRateItemVisibility = driver
-                .FindElement(discountedRateItemLocator)
-                .Displayed;
+            bool discountedRateItemVisibility = ElementIsDisplaying(discountedRateItemLocator);
             Assert.That(discountedRateItemVisibility, Is.EqualTo(true));
         }
     }
