@@ -1,1 +1,3 @@
 *.feature.cs
+project-cache
+bin

@@ -116,3 +116,4 @@
 /Users/taimoorpasha/Documents/Code/NextBasketChallenge/bin/Debug/netcoreapp6.0/nunit.framework.legacy.dll
 /Users/taimoorpasha/Documents/Code/NextBasketChallenge/bin/Debug/netcoreapp6.0/WebDriver.dll
 /Users/taimoorpasha/Documents/Code/NextBasketChallenge/obj/Debug/netcoreapp6.0/NextBask.DC2C423D.Up2Date
+/Users/taimoorpasha/Documents/Code/NextBasketChallenge/obj/Debug/netcoreapp6.0/NextBasketChallenge.sourcelink.json

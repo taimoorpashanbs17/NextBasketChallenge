@@ -1,4 +1,4 @@
-Feature: Order Functionality
+Feature: Order Functionality With Different Scenarios
 
     Scenario: Verify Search Functionality working fine
         Given Open Browser with provided URL
